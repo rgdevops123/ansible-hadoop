@@ -1,0 +1,3 @@
+---
+- name: Copy .bashrc Script
+  template: src=bashrc.j2 dest=/home/hadoop/.bashrc

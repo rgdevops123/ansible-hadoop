@@ -1,0 +1,41 @@
+---
+- name: Create Hadoop Log Path
+  file:
+    path: "{{ hadoop_log_path }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    state: directory
+    mode: 0755
+
+- name: Copy Hadoop
+  copy: src={{ download_path }}/hadoop-{{hadoop_version}}.tar.gz dest=/tmp owner={{ user }} mode=755
+
+- name: Unzip Hadoop
+  unarchive: src=/tmp/hadoop-{{hadoop_version}}.tar.gz dest={{ hadoop_path }} copy=no
+
+- name: Rename Hadoop
+  shell: "mv {{ hadoop_path }}/hadoop-{{hadoop_version}} {{ hadoop_path }}/hadoop"
+
+- name: Set Ownership of Hadoop
+  file: dest={{ hadoop_path }}/hadoop owner={{ user }} group={{ group }} recurse=yes
+
+- name: Copy Hadoop core-site.xml
+  template: src=core_site.xml.j2 dest={{ hadoop_config_path }}/core-site.xml mode=644 owner={{ user }} group = {{ group }}
+
+- name: Copy Hadoop hdfs-site.xml
+  template: src=hdfs_site.xml.j2 dest={{ hadoop_config_path }}/hdfs-site.xml mode=644 owner={{ user }} group = {{ group }}
+
+- name: Copy Hadoop mapred-site.xml
+  template: src=mapred_site.xml.j2 dest={{ hadoop_config_path }}/mapred-site.xml mode=644 owner={{ user }} group = {{ group }}
+
+- name: Copy Hadoop yarn-site.xml
+  template: src=yarn_site.xml.j2 dest={{ hadoop_config_path }}/yarn-site.xml mode=644 owner={{ user }} group = {{ group }}
+
+- name: Copy Hadoop workers
+  template: src=workers.j2 dest={{ hadoop_config_path }}/workers mode=644 owner={{ user }} group = {{ group }}
+
+- name: Copy Hadoop Env Script
+  template: src=hadoop_env.sh.j2 dest=/etc/profile.d/hadoop_env.sh mode=755
+
+- name: Set Hadoop Env
+  shell: source /etc/profile.d/hadoop_env.sh

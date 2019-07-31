@@ -1,0 +1,21 @@
+
+# Get Master Public Key
+- hosts: master 
+  remote_user: root
+  vars_files:
+    - vars/main.yml
+  roles:
+    - fetch_public_key
+
+- hosts: workers 
+  remote_user: root
+  vars_files:
+    - vars/main.yml
+  roles:
+    - user
+    - authorized
+    - java
+    - hadoop
+    - bash
+
+

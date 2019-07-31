@@ -1,0 +1,19 @@
+---
+# User
+user: "hadoop"
+group: "hadoop"
+
+# Java
+jvm_home: "/usr/lib/jvm"
+java_packages:
+ - "java-1.8.0-openjdk"
+ - "java-1.8.0-openjdk-devel"
+
+# Hadoop
+download_path: "/home/ansible/Downloads"
+hadoop_version: "3.0.3"
+hadoop_path: "/home/hadoop"
+hadoop_home: "/home/hadoop/hadoop"
+hadoop_config_path: "/home/hadoop/hadoop/etc/hadoop"
+hadoop_log_path: "/home/hadoop/logs"
+hadoop_master: "node-master"
