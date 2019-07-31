@@ -1,5 +1,5 @@
 # ansible-hadoop
-================
+
 - Install Hadoop Cluster with Ansible.
 - OS: CentOS 7
 - JDK: Openjdk-1.8
