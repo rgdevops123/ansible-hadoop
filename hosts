@@ -1,6 +1,5 @@
 [master]
-node-master
+hadoop-server-1
 [workers]
-node1
-node2
-node3
+hadoop-server-2
+hadoop-server-3
